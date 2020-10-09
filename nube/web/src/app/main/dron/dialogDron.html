@@ -1,0 +1,101 @@
+<h1 mat-dialog-title class="text-center headerModal">
+  Dron
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="dronForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input
+            matInput
+            formControlName="modelo"
+            placeholder="Modelo"
+            type="text"
+            class="text-number"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input
+            matInput
+            formControlName="numero_serie"
+            placeholder="Numero de serie"
+            type="text"
+            class="text-number"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input
+            matInput
+            formControlName="tipo_dron"
+            placeholder="Tipo de dron"
+            class="text-number"
+            type="text"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input
+            matInput
+            formControlName="marca"
+            placeholder="Marca"
+            class="text-number"
+            type="text"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <textarea
+            matInput
+            formControlName="descripcion"
+            placeholder="Descripción"
+            class="text-number"
+            type="text"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input
+            matInput
+            formControlName="capacidad"
+            placeholder="Capacidad (kg)"
+            class="text-number"
+            type="number"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
+<div>
+  <!-- mat-dialog-actions -->
+
+  <button
+    mat-stroked-button
+    color="primary"
+    class="pull-right ml-b"
+    (click)="onSubmit()"
+    [disabled]="dronForm.invalid"
+  >
+    Guardar
+  </button>
+  <button
+    mat-stroked-button
+    color="primary"
+    class="pull-right"
+    (click)="onNoClick()"
+  >
+    Cancelar
+  </button>
+</div>

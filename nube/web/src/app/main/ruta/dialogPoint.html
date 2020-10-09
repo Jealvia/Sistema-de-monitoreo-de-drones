@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-10">
+    <h1 mat-dialog-title class="text-left headerModal">
+      Punto de ruta
+    </h1>
+  </div>
+  <div class="col-2">
+    <button mat-icon-button color="warn" (click)="eliminar()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>
+<div mat-dialog-content>
+  <form [formGroup]="pointForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-12">
+        <mat-form-field>
+          <input
+            matInput
+            formControlName="takeoff"
+            placeholder="Altura (m)"
+            type="number"
+            class="text-number"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
+<div>
+  <button
+    mat-stroked-button
+    color="primary"
+    class="pull-right ml-b"
+    (click)="onSubmit()"
+    [disabled]="pointForm.invalid"
+  >
+    Guardar
+  </button>
+  <button
+    mat-stroked-button
+    color="primary"
+    class="pull-right"
+    (click)="onNoClick()"
+  >
+    Cancelar
+  </button>
+</div>

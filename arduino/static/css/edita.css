@@ -1,0 +1,35 @@
+p{
+    text-align: center;
+    font-weight: bold;
+}
+
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.guarda, .resetea, .actualiza{
+    width: 70%;
+    font-weight: bold;
+    font-size: 80%;
+    border-radius: 1%;
+}
+
+.guarda, .actualiza{
+    background-color: turquoise;
+}
+
+.resetea{
+    background-color: tomato;
+}
+
+.box{
+    color:blue;
+    font-weight: bold;
+}
+
+.button{
+    font-weight : bold
+}

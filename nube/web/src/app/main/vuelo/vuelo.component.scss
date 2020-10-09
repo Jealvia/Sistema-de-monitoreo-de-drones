@@ -1,0 +1,47 @@
+.card-modified {
+  margin-top: 5px;
+}
+
+/* .map-container {
+  position: relative;
+  margin-top: 7%;
+}
+
+.map-frame {
+  border: 2px solid black;
+  height: 80.5vh;
+  width: 98.5vw;
+}
+
+#map {
+  height: 80vh;
+  width: 98vw;
+} */
+
+.map-container {
+  position: relative;
+  /* top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; */
+  //margin: 0 0 0 1%;
+  margin-top: 0;
+  height: 82vh;
+  width: 100vw;
+}
+
+.map-frame {
+  border: 2px solid black;
+  height: 100%;
+  width: 100%;
+}
+
+#map2 {
+  height: 100%;
+  width: 100%;
+}
+
+.vertical-bar {
+  overflow-y: scroll;
+  height: calc(85vh - 2rem);
+}

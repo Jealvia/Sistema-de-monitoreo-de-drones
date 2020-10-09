@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="col-md-5">
+    <h1>Drones</h1>
+  </div>
+  <div class="col-md-5">
+    <mat-form-field>
+      <mat-label>Filtro</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ej. dron.." #input>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2" align="center">
+    <button
+      mat-icon-button
+      color="primary"
+      aria-label="Crear dron"
+      (click)="openDialog()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="col-md-12">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- ID Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nro.</th>
+          <td mat-cell *matCellDef="let row; let i = index">
+            {{ paginator.pageIndex * paginator.pageSize + (i + 1) }}
+          </td>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="modelo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Modelo</th>
+          <td mat-cell *matCellDef="let row">{{ row.modelo }}</td>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+          <td mat-cell *matCellDef="let row">{{ row.descripcion }}</td>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="numero_serie">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Número de serie
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.numero_serie }}
+          </td>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="tipo_dron">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.tipo_dron }}
+          </td>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="marca">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Marca</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.marca }}
+          </td>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="capacidad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Capacidad (kg)
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.capacidad }}
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary" (click)="openDialog(row)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <!-- <button mat-icon-button color="warn">
+              <mat-icon>delete</mat-icon>
+            </button> -->
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator
+        [length]="pagineo.length"
+        [pageSize]="pagineo.pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+      ></mat-paginator>
+    </div>
+  </div>
+</div>

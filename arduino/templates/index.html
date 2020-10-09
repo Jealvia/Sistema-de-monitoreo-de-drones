@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Administrador de Arduino</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"
+    />
+    <script src="../static/jquery.min.js"></script>
+    <script src="../static/socket.io.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css" />
+  </head>
+
+  <body>
+    <section class="hero has-background-white is-fullheight">
+      <!-- Hero head: will stick at the top -->
+      <div class="hero-head">
+        <header class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <span
+                class="navbar-burger burger"
+                data-target="navbarMenuHeroC"
+                onclick="myFunction()"
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenuHeroC" class="navbar-menu">
+              <div class="navbar-end">
+                <a class="navbar-item is-active">
+                  <strong>BIENVENIDO, ADMINISTRADOR</strong>
+                </a>
+                <a class="navbar-item is-active">
+                  <button
+                    class="button is-primary modal-button5 is-success is-fullwidth"
+                    data-target="#myModal5"
+                    aria-haspopup="true"
+                    id="configura"
+                  >
+                    Configuración
+                  </button>
+
+                  <!-- Zona del modal configuración-->
+                  <div class="modal" id="myModal5">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                      <div class="box">
+                        Está a punto de entrar a la página de configuración. Si
+                        no aún no ha registrado el dron en ella podrá hacerlo,
+                        de lo contrario automáticamente tendrá la opción de
+                        editar la información del dispositivo.
+                        <div class="columns is-centered is-vcentered">
+                          <div class="column is-6">
+                            <button class="button is-primary is-fullwidth ok">
+                              ACEPTAR
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      class="modal-close is-large"
+                      aria-label="close"
+                    ></button>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </header>
+      </div>
+
+      <!-- Cuerpo del sitio web -->
+      <div class="container">
+        <div class="columns is-vcentered">
+          <div class="column is-5">
+            <p class="title is-size-4" id="conecta">CONECTAR DRON</p>
+          </div>
+          <div class="column is-3">
+            <button
+              class="button is-primary modal-button7 is-success is-fullwidth"
+              data-target="#myModal7"
+              aria-haspopup="true"
+              id="iniciar"
+            >
+              Iniciar
+            </button>
+
+            <!-- Zona del modal mensaje-->
+            <div class="modal" id="myModal7">
+              <div class="modal-background"></div>
+              <div class="modal-content">
+                <div class="box" id="cajita">
+                  <div class="columns is-centered is-vcentered">
+                    <div class="column is-6">
+                      <button class="button is-primary is-fullwidth ok">
+                        ACEPTAR
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="modal-close is-large" aria-label="close"></button>
+            </div>
+          </div>
+
+          <div class="column is-4">
+            <img src="../static/images/drone.gif" />
+          </div>
+        </div>
+
+        <div class="columns is-centered is-vcentered" id="titulo">
+          <div class="column">
+            <p class="title is-size-4 has-text-centered" id="info">
+              Por favor, escoja un tipo de conexión para comunicarse con el dron
+            </p>
+          </div>
+        </div>
+        <div class="columns is-centered is-vcentered" id="protocolo">
+          <div class="column is-4">
+            <p class="title is-size-6" id="pro">CONECTAR CON TCP</p>
+          </div>
+          <div class="column is-2">
+            <button
+              class="button is-primary modal-button1 is-success is-fullwidth"
+              data-target="#myModal1"
+              aria-haspopup="true"
+              id="tcp"
+            >
+              TCP
+            </button>
+
+            <!-- Zona del modal TCP-->
+            <div class="modal" id="myModal1">
+              <div class="modal-background"></div>
+              <div class="modal-content">
+                <div class="box">
+                  ¿Está seguro de querer conectarse al dron usando el protocolo
+                  TCP? Si ya estableció previamente una conexión o si un cliente
+                  tiene un vuelo activo en este momento, por favor de click en
+                  CANCELAR.
+                  <div class="columns is-centered is-vcentered">
+                    <div class="column is-6">
+                      <button class="button is-primary is-fullwidth conectar">
+                        CONECTAR
+                      </button>
+                    </div>
+                    <div class="column is-6">
+                      <button class="button is-danger is-fullwidth cancelar">
+                        CANCELAR
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="modal-close is-large" aria-label="close"></button>
+            </div>
+          </div>
+          <div class="column is-4">
+            <p class="title is-size-6" id="pro">CONECTAR CON UDP</p>
+          </div>
+          <div class="column is-2">
+            <button
+              class="button is-primary modal-button2 is-success is-fullwidth"
+              data-target="#myModal2"
+              aria-haspopup="true"
+              id="udp"
+            >
+              UDP
+            </button>
+
+            <!-- Zona del modal UDP-->
+            <div class="modal" id="myModal2">
+              <div class="modal-background"></div>
+              <div class="modal-content">
+                <div class="box">
+                  ¿Está seguro de querer conectarse al dron usando el protocolo
+                  UDP? Si ya estableció previamente una conexión o si un cliente
+                  tiene un vuelo activo en este momento, por favor de click en
+                  CANCELAR.
+                  <div class="columns is-centered is-vcentered">
+                    <div class="column is-6">
+                      <button class="button is-primary is-fullwidth conectar">
+                        CONECTAR
+                      </button>
+                    </div>
+                    <div class="column is-6">
+                      <button class="button is-danger is-fullwidth cancelar">
+                        CANCELAR
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="modal-close is-large" aria-label="close"></button>
+            </div>
+
+            <!-- Zona del modal EXITO-->
+            <div class="modal" id="myModal3">
+              <div class="modal-background"></div>
+              <div class="modal-content">
+                <div class="box">
+                  ¡Conexión realizada con éxito!
+                  <div class="columns is-centered is-vcentered">
+                    <div class="column is-6">
+                      <button class="button is-primary is-fullwidth ok">
+                        ACEPTAR
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="modal-close is-large" aria-label="close"></button>
+            </div>
+
+            <!-- Zona del modal latencia-->
+            <div class="modal" id="myModal4">
+              <div class="modal-background"></div>
+              <div class="modal-content">
+                <div class="box">
+                  El dron ha experimentado una pequeña latencia al conectarse,
+                  ¡pero su conexión ha sido exitosa!
+                  <div class="columns is-centered is-vcentered">
+                    <div class="column is-6">
+                      <button class="button is-primary is-fullwidth ok">
+                        ACEPTAR
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="modal-close is-large" aria-label="close"></button>
+            </div>
+          </div>
+        </div>
+        <div class="columns is-centered is-vcentered" id="protocolo1">
+          <div class="column is-12">
+            <h1 id="ventana">MONITOREO DE MISIÓN EN TIEMPO REAL</h1>
+          </div>
+        </div>
+        <div class="columns is-centered is-vcentered" id="protocolo2">
+          <div class="column is-10 is-centered is-vcentered">
+            <pre id="datos"></pre>
+          </div>
+        </div>
+        <div class="columns is-centered is-vcentered">
+          <div class="column is-5">
+            <button
+              class="button is-danger modal-button8 is-success is-fullwidth"
+              data-target="#myModal8"
+              aria-haspopup="true"
+              id="nuevos"
+            >
+              LIBERAR PUERTOS TCP Y UDP
+            </button>
+
+            <!-- Zona del modal mensaje-->
+            <div class="modal" id="myModal8">
+              <div class="modal-background"></div>
+              <div class="modal-content">
+                <div class="box" id="cajita">
+                  ¿ESTÁ SEGURO DE LIBERAR AMBOS PUERTOS? SI ES ASÍ, DE CLICK EN EL BOTÓN "LIBERAR PUERTOS", CASO CONTRARIO DE CLICK EN EL BOTÓN "CANCELAR".
+                  <div class="columns is-centered is-vcentered">
+                    <div class="column is-6">
+                      <button class="button is-primary is-fullwidth okis">
+                        LIBERAR PUERTOS
+                      </button>
+                    </div>
+                    <div class="column is-6">
+                      <button class="button is-danger is-fullwidth ya_no">
+                        CANCELAR
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script src="../static/js/index.js"></script>
+</html>

@@ -1,0 +1,161 @@
+<div>
+  <div class="row">
+    <div class="col-md-3">
+      <h1>Crear ruta</h1>
+    </div>
+    <div class="col-md-3" *ngIf="!showData">
+      <mat-form-field >
+        <input
+          matInput
+          placeholder="Altura general (m)"
+          [(ngModel)]="alturaGeneral"
+          type="number"
+          class="text-number"
+          [disabled]="!iconMarkerActive"
+        />
+      </mat-form-field>
+    </div>
+    <div class="col-md-3" *ngIf="showData">
+      <mat-form-field >
+        <mat-label>Filtro</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ej. ruta.." #input>
+      </mat-form-field>
+    </div>
+    <div class="col-md-6" align="end">
+      <button
+        mat-icon-button
+        [color]="!iconMarkerActive ? 'primary' : ''"
+        [class]="iconMarkerActive ? 'icon-inactive' : ''"
+        *ngIf="!showData"
+        (click)="addMarker()"
+      >
+        <mat-icon>room</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="primary"
+        *ngIf="!showData"
+        (click)="saveRoute()"
+      >
+        <mat-icon>save</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="primary"
+        *ngIf="!showData"
+        (click)="deleteRoute()"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="primary"
+        aria-label="Example icon button with a open in new tab icon"
+        (click)="showList(true)"
+        *ngIf="!showData"
+      >
+        <mat-icon>list</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="primary"
+        aria-label="Example icon button with a open in new tab icon"
+        (click)="showList(false)"
+        *ngIf="showData"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+      <!-- <input type="file" acept="application/pdf" placeholder="Buscar"
+              (change)="onChange($event)" /> -->
+      <app-file-upload
+        (complete)="onFileComplete($event)"
+        *ngIf="!showData"
+      ></app-file-upload>
+    </div>
+  </div>
+  <div class="row">
+    <div class="map-container col-md-12" *ngIf="!showData">
+      <div class="map-frame">
+        <div id="map"></div>
+      </div>
+    </div>
+    <div class="col-md-12" [hidden]="!showData">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- ID Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nro.</th>
+            <td mat-cell *matCellDef="let row; let i = index">
+              {{ paginator.pageIndex * paginator.pageSize + (i + 1) }}
+            </td>
+          </ng-container>
+
+          <!-- Progress Column -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let row">{{ row.nombre }}</td>
+          </ng-container>
+
+          <!-- Progress Column -->
+          <ng-container matColumnDef="alias">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Alias</th>
+            <td mat-cell *matCellDef="let row">{{ row.alias }}</td>
+          </ng-container>
+
+          <!-- Progress Column -->
+          <ng-container matColumnDef="coordenada_inicial">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Coordenada inicial
+            </th>
+            <td mat-cell *matCellDef="let row">
+              {{
+                "(" +
+                  row.puntos_ruta[0].latitud.toPrecision(5) +
+                  "," +
+                  row.puntos_ruta[0].longitud.toPrecision(5) +
+                  ")"
+              }}
+            </td>
+          </ng-container>
+
+          <!-- Progress Column -->
+          <ng-container matColumnDef="coordenada_final">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Coordenada inicial
+            </th>
+            <td mat-cell *matCellDef="let row">
+              {{
+                "(" +
+                  row.puntos_ruta[row.puntos_ruta.length-1].latitud.toPrecision(5) +
+                  "," +
+                  row.puntos_ruta[row.puntos_ruta.length-1].longitud.toPrecision(5) +
+                  ")"
+              }}
+            </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button color="primary" (click)="editRoute(row)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <!-- <button mat-icon-button color="warn">
+                <mat-icon>delete</mat-icon>
+              </button> -->
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator
+          [length]="pagineo.length"
+          [pageSize]="pagineo.pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+        ></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~leaflet/dist/leaflet.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Mat Table */
+.mat-elevation-z8 {
+  margin: 10px 0px!important;
+}
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.expanded{ /*.rowSelect */
+  background-color: #1B5E20!important;
+}
+.expanded> mat-cell{ /*rowSelect */
+  color: #fff;
+}
+.expanded> mat-cell .mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-bar {
+  background-color: rgb(178, 255, 89);
+}
+.expanded> mat-cell .mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-thumb {
+  background-color: #b2ff59;
+}

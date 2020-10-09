@@ -1,0 +1,51 @@
+.vertical-center{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.horizontal-center{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#conecta{
+    text-align: center;
+    font-weight: bold;
+}
+
+#pro{
+    text-align: center;
+    font-weight: bold;
+}
+
+#info{
+    font-weight: bold;
+}
+
+#ventana{
+    font-weight: bold;
+    text-align: center;
+    font-size: 150%;
+}
+
+#datos{
+    border-style: ridge;
+    border-radius: 5%;
+    font-weight: bold;
+    color: black;
+}
+
+.button{
+    font-weight : bold
+}
+
+.box{
+    color:blue;
+    font-weight: bold;
+}
+
+.guardar{
+    background-color: yellowgreen;
+    color:white;
+    font-weight: bold;
+}

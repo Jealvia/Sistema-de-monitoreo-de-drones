@@ -1,0 +1,283 @@
+<div class="container" *ngIf="!historial">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-9">
+        <h1>Misión</h1>
+      </div>
+      <div class="col-1" align="end" *ngIf="!misionForm">
+        <button
+          mat-icon-button
+          color="primary"
+          [hidden]="seeMision"
+          (click)="verMision()"
+        >
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+      </div>
+      <div class="col-1" align="end" *ngIf="misionForm">
+        <button mat-icon-button color="primary" (click)="mostrarDronesDisponibles()">
+          <mat-icon>history</mat-icon>
+        </button>
+      </div>
+      <div class="col-1" *ngIf="!misionForm"></div>
+      <div class="col-1" align="end" *ngIf="!misionForm">
+        <button mat-icon-button color="primary" (click)="history()">
+          <mat-icon>list</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4" *ngIf="!misionForm">
+      <div class="row">
+        <div class="col-11 vertical-bar">
+          <div class="row">
+            <div class="col-8">
+              <h3 style="margin-top: 4%; margin-bottom: auto;">
+                Drones disponibles
+              </h3>
+            </div>
+            <div class="col-2">
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="crearMision()"
+                [disabled]="!sendMision"
+              >
+                <mat-icon>flight_takeoff</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="row" *ngFor="let dron of dronesActivos">
+            <div class="col">
+              <mat-card class="card-modified">
+                <div class="row">
+                  <div class="col">
+                    <div class="row">
+                      <div class="col-10">
+                        <p>Nº de serie: {{ dron.dron.numero_serie }}</p>
+                      </div>
+                      <div class="col-2">
+                        <mat-checkbox
+                          class="example-margin"
+                          [(ngModel)]="dron.selected"
+                          *ngIf="dron.route"
+                          color="primary"
+                        >
+                        </mat-checkbox>
+                      </div>
+                    </div>
+                    <p>Descripción: {{ dron.dron.descripcion }}</p>
+                    <div class="row">
+                      <div class="col-8">
+                        <mat-form-field appearance="">
+                          <mat-label>Rutas</mat-label>
+                          <mat-select
+                            [(ngModel)]="dron.route"
+                            (selectionChange)="routeSelected(dron)"
+                          >
+                            <mat-option
+                              *ngFor="let ruta of dron.routes"
+                              [value]="ruta._id"
+                            >
+                              {{ ruta.nombre }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-4">
+                        <button
+                          mat-icon-button
+                          color="primary"
+                          *ngIf="dron.route"
+                          (click)="seeRoute(dron)"
+                        >
+                          <mat-icon>visibility</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="map-container col-md-8">
+      <div class="map-frame">
+        <div id="map2"></div>
+      </div>
+    </div>
+    <div class="col-4" *ngIf="misionForm">
+      <div class="row">
+        <div class="col-11 vertical-bar">
+          <div class="row" *ngFor="let dron of marcadorDronesMisionActivas">
+            <div class="col">
+              <mat-card class="card-modified">
+                <div class="row">
+                  <div class="col">
+                    <div class="row">
+                      <div class="col-12">
+                        <p>
+                          Nº de serie: {{ dron.data_punto.dron.numero_serie }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <p>
+                          Pitch: {{ dron.data_punto.position.rotaciones.x }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <p>Yaw: {{ dron.data_punto.position.rotaciones.y }}</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <p>Roll: {{ dron.data_punto.position.rotaciones.z }}</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p>
+                          Latitud:
+                          {{
+                            dron.data_punto.position.ubicacion_actual.latitud
+                          }}
+                        </p>
+                      </div>
+                      <div class="col-6">
+                        <p>
+                          Longitud:
+                          {{
+                            dron.data_punto.position.ubicacion_actual.longitud
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <p>
+                          Altitud:
+                          {{
+                            dron.data_punto.position.ubicacion_actual.altitud
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <p>
+                          Bateria:
+                          {{ dron.data_punto.position.bateria_residua }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <p>
+                          Velocidad eje x:
+                          {{ dron.data_punto.position.velocidad[0] }}m/s
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <p>
+                          Velocidad eje y:
+                          {{ dron.data_punto.position.velocidad[1] }}m/s
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <p>
+                          Velocidad eje z:
+                          {{ dron.data_punto.position.velocidad[2] }}m/s
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" [hidden]="!historial">
+  <div class="row">
+    <div class="col-md-7">
+      <h1>Historial de misiones</h1>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field >
+        <mat-label>Filtro</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ej. mision.." #input>
+      </mat-form-field>
+    </div>
+    <div class="col-md-2" align="center">
+      <button
+        mat-stroked-button
+        color="primary"
+        class="pull-right"
+        (click)="createMision()"
+      >
+        Crear misión
+      </button>
+    </div>
+    <div class="col-md-12">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let row">{{ row.nombre }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+            <td mat-cell *matCellDef="let row">{{ row.fecha_inicio }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="hora_inicio">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Hora inicio
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.hora_inicio }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="hora_fin">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Hora fin
+            </th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.hora_fin }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dron">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Dron</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.dron.numero_serie }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator
+          [length]="pagineo.length"
+          [pageSize]="pagineo.pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+        ></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

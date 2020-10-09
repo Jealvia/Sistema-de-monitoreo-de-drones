@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Configuracion</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css" />
+  <script src="../static/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../static/css/config.css" />
+</head>
+
+<body>
+  <section class="hero has-background-white is-fullheight">
+    <!-- Hero head: will stick at the top -->
+    <div class="hero-head">
+      <header class="navbar">
+        <div class="container">
+          <div class="navbar-brand">
+            <span class="navbar-burger burger" data-target="navbarMenuHeroC" onclick="myFunction()">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </div>
+          <div id="navbarMenuHeroC" class="navbar-menu">
+            <div class="navbar-end">
+              <a class="navbar-item is-active">
+                <button class="button is-info" id="panel">Panel de Administrador</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <!-- Cuerpo del sitio web -->
+    <div class="container">
+      <div class="columns is-centered is-vcentered">
+        <div class="column is-12">
+          <p class="title is-size-3" id="configura">CREACIÓN DE DRON</p>
+        </div>
+      </div>
+      <div class="columns is-vcentered">
+        <div class="column is-12">
+            <img src="../static/images/drone2.gif" />
+        </div>
+      </div>
+
+    <div class="container" id="principal">
+        <form id="conf" action="/config">
+
+            <div class="field">
+                <label class="label" for="numero_serie">Número de serie</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="Ingrese número de serie" id="numero_serie"
+                   name="numero_serie" pattern="[0-9]+" required>
+            </div>
+
+            <div class="field">
+                <label class="label" for="modelo">Modelo</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="Ingrese modelo" id="modelo" name="modelo"
+                  required>
+                </div>
+            </div>
+    
+            <div class="field">
+                <label class="label" for="marca">Marca</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="Ingrese marca" id="marca"
+                   name="marca" required>
+            </div>
+
+            <div class="field">
+                <label class="label" for="capacidad">Capacidad (en kg)</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="Ingrese capacidad" id="capacidad"
+                   name="capacidad" pattern="[0-9]+" required>
+            </div>
+
+            <div class="field">
+                <label class="label" for="descripcion">Descripción</label>
+                <div class="control">
+                    <textarea class="textarea" placeholder="Ingrese descripción" id="descripcion" 
+                    name="descripcion" required></textarea>
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control">
+                  <button class="button is-link">CREAR DRON</button>
+                </div>
+
+        </form>
+    </div>
+      
+          <!-- Zona del modal EXITO POST-->
+          <div class="modal" id="myModal3">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+              <div class="box">
+                ¡Dron creado y guardado con éxito!
+              </div>
+            </div>
+          </div>
+
+          <!-- Zona del modal ERROR-->
+          <div class="modal" id="myModal4">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+              <div class="box">
+                Ha ocurrido un error.
+              </div>
+            </div>
+          </div>
+
+    </div>
+  </section>
+</body>
+<script src="../static/js/config.js"></script>
+
+</html>

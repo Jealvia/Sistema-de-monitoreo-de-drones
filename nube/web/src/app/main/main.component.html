@@ -1,0 +1,85 @@
+<div class="content-fluid contenedor" [class.is-mobile]="mobileQuery.matches">
+  <!--
+<mat-toolbar color="primary" class="toolbar">
+
+    <h1 class="app-name">Responsive App</h1>
+  </mat-toolbar>
+  -->
+
+  <mat-toolbar color="primary" class="toolbar">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="snav.toggle()" class="btn-tolbar">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span></span>
+
+      <span style="width: 80%; text-align: center;"></span>
+      <!-- <span class="spacer"></span> -->
+      <!-- <button mat-icon-button class="btn-tolbar">
+        <mat-icon>settings</mat-icon>
+      </button>
+      <button mat-icon-button class="btn-tolbar">
+        <mat-icon>account_circle</mat-icon>
+      </button> -->
+      <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="btn-tolbar">
+        <mat-icon matBadge="15" matBadgeColor="warn" style="color:#ffd538!important;">notifications</mat-icon>
+      </button>
+      <button mat-icon-button  class="btn-tolbar">
+        <mat-icon>exit_to_app</mat-icon>
+      </button> -->
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container
+    class="sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+      class="siderbar"
+    >
+      <mat-nav-list class="menu">
+        <a mat-list-item routerLink="/main/inicio" class="item">
+          <mat-icon mat-list-icon>home</mat-icon>
+          <div class="menu-item-nombre">Inicio</div>
+        </a>
+        <a mat-list-item routerLink="/main/dron" class="item">
+          <mat-icon mat-list-icon>airplanemode_active</mat-icon>
+          <div class="menu-item-nombre">Dron</div>
+        </a>
+        <a mat-list-item routerLink="/main/ruta" class="item">
+          <mat-icon mat-list-icon>my_location</mat-icon>
+          <div class="menu-item-nombre">Ruta</div>
+        </a>
+        <a mat-list-item routerLink="/main/vuelo" class="item">
+          <mat-icon mat-list-icon>flight_takeoff</mat-icon>
+          <div class="menu-item-nombre">Vuelo</div>
+        </a>
+      </mat-nav-list>
+
+      <div class="back-img"></div>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="body-content">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>dialpad</mat-icon>
+    <span>Redial</span>
+  </button>
+  <button mat-menu-item disabled>
+    <mat-icon>voicemail</mat-icon>
+    <span>Check voice mail</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <span>Disable alerts</span>
+  </button>
+</mat-menu>
